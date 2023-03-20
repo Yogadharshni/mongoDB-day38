@@ -1532,3 +1532,13 @@ db.user.find({}, { name: 1, codekata: 1, _id: 0 })
 db.mentors.find({ mentee: { $gt: '15' } }, { mentorname: 1, mentee: 1, _id: 0 })
 
 //Find the number of users who are absent and task is not submitted between 15 oct-2020 and 31-oct-2020
+db.user.find({
+    roadmap: {
+        $elemMatch:
+        {
+            date: { $gte: "15/10/2020", $lte: "31/10/2020" },
+            attendances: { $eq: "absent" },
+            task: { $eq: "not submitted" }
+        }
+    }
+}, { name: 1, roadmap: 1, _id: 0 })
